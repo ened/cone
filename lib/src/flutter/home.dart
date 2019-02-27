@@ -6,7 +6,15 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('cone'),
+        title: Text('Welcome to cone'),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.pageview),
+            onPressed: () {
+              Navigator.pushNamed(context, '/show-transactions');
+            },
+          ),
+        ],
       ),
       body: DefaultTextStyle(
         style: Theme.of(context).textTheme.body1,

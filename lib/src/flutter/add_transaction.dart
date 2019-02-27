@@ -54,7 +54,7 @@ class AddTransactionState extends State<AddTransaction> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('cone'),
+        title: Text('Add a transaction'),
         actions: <Widget>[
           Builder(
             builder: (context) => IconButton(
