@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:package_info/package_info.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
-import 'package:simple_permissions/simple_permissions.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import 'package:cone/src/flutter/transaction.dart';
 import 'package:cone/src/flutter/posting_widget.dart';
@@ -270,12 +270,7 @@ class AddTransactionState extends State<AddTransaction> {
 class TransactionStorage {
   static Future<void> writeTransaction(String transaction) async {
     final directory = '/storage/emulated/0/Documents/cone/';
-    bool permission = await SimplePermissions.checkPermission(
-        Permission.WriteExternalStorage);
-    if (!permission) {
-      await SimplePermissions.requestPermission(
-          Permission.WriteExternalStorage);
-    }
+    await PermissionHandler().requestPermissions([PermissionGroup.storage]);
     await Directory(directory).create(recursive: true);
     final file = File(p.join(directory, '.cone.ledger.txt'));
     return file.writeAsString('$transaction', mode: FileMode.append);
